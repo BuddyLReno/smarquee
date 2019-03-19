@@ -2,7 +2,7 @@
   "name": "smarquee",
   "version": "0.1.0",
   "description": "A smart scrolling marquee for audio players and other scrolling text needs.",
-  "main": "index.js",
+  "main": "dist/smarquee.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
