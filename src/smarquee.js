@@ -1,14 +1,12 @@
-export class Smarquee {
-  defaults = {
-    selector: '[data-smarquee]',
-    velocity: 50,
-    titleSiblingMargin: 36
-  }
+import defaults from './defaults';
 
-  settings = {}
+export default class Smarquee {
 
   constructor(options = {}) {
-    settings = Object.assign({}, defaults, options);
-    console.log(settings);
+    this.settings = Object.assign({}, defaults, options);
+  }
+
+  init() {
+    console.log(this.settings);
   }
 }

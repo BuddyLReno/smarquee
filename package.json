@@ -2,8 +2,11 @@
   "name": "smarquee",
   "version": "0.1.0",
   "description": "A smart scrolling marquee for audio players and other scrolling text needs.",
+  "author": "Buddy Reno <thebudman84+smarquee@gmail.com> (https://buddyreno.dev)",
+  "license": "GPL-2.0",
   "main": "dist/smarquee.min.js",
   "scripts": {
+    "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
     "build:demo": "sass src/stylesheets/demo.scss demo/demo.css",
@@ -13,8 +16,6 @@
     "type": "git",
     "url": "git+https://github.com/BuddyLReno/smarquee.git"
   },
-  "author": "Buddy Reno",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/BuddyLReno/smarquee/issues"
   },
@@ -23,8 +24,12 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.4",
+    "babel-loader": "^8.0.5",
     "browser-sync": "^2.26.3",
-    "sass": "^1.17.0"
+    "prepack-webpack-plugin": "^1.1.2",
+    "sass": "^1.17.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   },
   "dependencies": {}
 }
