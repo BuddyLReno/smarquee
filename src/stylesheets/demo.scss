@@ -1,0 +1,74 @@
+@import "vendor/scut";
+@import "vendor/normalize";
+
+.DeviceList {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+
+  &-item {
+    box-shadow: scut-rem(0 4 9 0) rgba(black, 0.2);
+    padding: scut-rem(16);
+    min-height: scut-rem(300);
+
+    &--small {
+      max-width: scut-rem(320);
+    }
+
+    &--medium {
+      max-width: scut-rem(411);
+    }
+
+    &--large {
+      max-width: scut-rem(600);
+    }
+  }
+
+  &-itemTitle {
+    --time: 15s;
+    --distance: -100%;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    position: relative;
+
+    &:after {
+      content: '';
+      display: inline-block;
+      background-image: linear-gradient(
+        to right,
+        rgba(white, 0),
+        rgba(white, 1),
+        rgba(white, 1)
+      );
+      width: scut-rem(22);
+      height: 100%;
+      position: absolute;
+      right: scut-rem(-3);
+    }
+
+    &.animate {
+      animation-name: marquee;
+      animation-duration: var(--time);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .marqueedTitle {
+      display: none;
+    }
+
+    @keyframes marquee {
+      0% {
+        transform: translate3d(0px, 0, 0);
+      }
+      70% {
+        transform: translate3d(var(--distance), 0, 0);
+      }
+      100% {
+        transform: translate3d(var(--distance), 0, 0);
+      }
+    }
+  }
+}
