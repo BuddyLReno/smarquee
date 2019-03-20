@@ -1,4 +1,6 @@
 import defaults from './defaults';
+import * as htmlUtils from './html-utilities';
+import * as mathUtils from './math-utilities';
 
 export default class Smarquee {
 
@@ -16,6 +18,8 @@ export default class Smarquee {
     } else {
       this.marqueeContainer = document.querySelector(this.settings.selector);
     }
+
+    this.originalMarqueeContent = this.marqueeContainer.innerHTML;
   }
 
   get needsMarquee() {
@@ -30,26 +34,21 @@ export default class Smarquee {
   }
 
   createScrollTitle() {
-    const titleContent = this.marqueeContainer.innerHTML;
-    const scrollTitle = `<span data-marquee-scroll-wrapper>${titleContent}<span data-smarquee-scroll-title>${titleContent}</span></span>`;
-
-    this.marqueeContainer.innerHTML = scrollTitle;
-    this.scrollWrapper = this.marqueeContainer.querySelector('[data-marquee-scroll-wrapper]');
+    this.scrollWrapper = htmlUtils.createScrollTitle(this.originalMarqueeContent, this.marqueeContainer);
   }
 
   setAnimationProperties() {
-    const distance = this.marqueeContainer.scrollWidth;
-    const finalDistance = distance / 2 + 24;
-    const time = distance / this.settings.velocity;
+    this.animationCalulations = mathUtils.calculateAnimationValues(this.marqueeContainer.scrollWidth, this.settings.velocity, this.settings.scrollingTitleMargin);
 
-    this.marqueeContainer.style.setProperty('--time', `${time}s`);
-    this.marqueeContainer.style.setProperty('--distance', `-${finalDistance}px`);
+    this.marqueeContainer.style.setProperty('--time', `${this.animationCalulations.time}s`);
+    this.marqueeContainer.style.setProperty('--distance', `-${this.animationCalulations.animatedDistance}px`);
+  }
 
-    this.animationCalulations.distance = distance;
-    this.animationCalulations.animatedDistance = finalDistance;
-    this.animationCalulations.time = time;
-
+  activateAnimation() {
     this.scrollWrapper.classList.add('animate');
   }
 
+  deactivateAnimation() {
+    this.scrollWrapper.classList.remove('animate');
+  }
 }
