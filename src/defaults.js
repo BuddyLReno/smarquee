@@ -1,5 +1,6 @@
 export default {
-  selector: '[data-smarquee]',
+  selector: '#smarquee',
+  element: null,
   velocity: 50,
   titleSiblingMargin: 36
 }

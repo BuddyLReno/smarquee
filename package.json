@@ -6,7 +6,7 @@
   "license": "GPL-2.0",
   "main": "dist/smarquee.min.js",
   "scripts": {
-    "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js",
+    "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js && cp dist/smarquee.min.js demo",
     "test": "echo \"Error: no test specified\" && exit 1",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
     "build:demo": "sass src/stylesheets/demo.scss demo/demo.css",

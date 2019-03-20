@@ -10,22 +10,28 @@
   <h1>Smarquee Demo</h1>
 
   <div class="DeviceList">
-    <div class="DeviceList-item DeviceList-item--small">
-      <h2 class="DeviceList-itemTitle" data-smarquee>
-        Pretty soon, I don't know what, but something is going to happen.
-      </h2>
-    </div>
     <div class="DeviceList-item DeviceList-item--medium">
-      <h2 class="DeviceList-itemTitle" data-smarquee>
+      <h2 id="smarquee2" class="DeviceList-itemTitle">
         Forget Not Your First Love, Speak In Tongues And Cheek.
       </h2>
     </div>
     <div class="DeviceList-item DeviceList-item--large">
-      <h2 class="DeviceList-itemTitle" data-smarquee>
+      <h2 id="smarquee" class="DeviceList-itemTitle">
         Everything Is Alive, Everything Is Breathing, Nothing Is Dead, Nothing Is Bleeding.
       </h2>
     </div>
   </div>
+  <script type="text/javascript" src="smarquee.min.js"></script>
+  <script type="text/javascript">
+    const smarquee = new Smarquee();
+
+
+    const smarquee2 = new Smarquee({
+      element: document.querySelector('#smarquee2')
+    });
+    console.log(smarquee);
+    console.log(smarquee2);
+  </script>
 </body>
 
 </html>
