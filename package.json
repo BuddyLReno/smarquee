@@ -7,7 +7,7 @@
   "main": "dist/smarquee.min.js",
   "scripts": {
     "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js && cp dist/smarquee.min.js demo",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
     "build:demo": "sass src/stylesheets/demo.scss demo/demo.css",
     "build": "yarn run build:demo"
@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.3.4",
     "babel-loader": "^8.0.5",
     "browser-sync": "^2.26.3",
+    "jest": "^24.5.0",
     "prepack-webpack-plugin": "^1.1.2",
     "sass": "^1.17.0",
     "webpack": "^4.29.6",
