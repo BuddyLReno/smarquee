@@ -17,7 +17,7 @@
     }
 
     &--medium {
-      max-width: scut-rem(411);
+      width: scut-rem(411);
     }
 
     &--large {
@@ -33,30 +33,15 @@
     width: 100%;
     position: relative;
 
-    &:after {
-      content: '';
-      display: inline-block;
-      background-image: linear-gradient(
-        to right,
-        rgba(white, 0),
-        rgba(white, 1),
-        rgba(white, 1)
-      );
-      width: scut-rem(22);
-      height: 100%;
-      position: absolute;
-      right: scut-rem(-3);
-    }
-
-    &.animate {
+    .animate {
       animation-name: marquee;
       animation-duration: var(--time);
       animation-timing-function: linear;
       animation-iteration-count: infinite;
-    }
-
-    .marqueedTitle {
-      display: none;
+      display: block;
+      > span {
+        margin-left: 24px;
+      }
     }
 
     @keyframes marquee {

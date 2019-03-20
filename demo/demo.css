@@ -363,25 +363,39 @@ template {
   max-width: 20rem;
 }
 .DeviceList-item--medium {
-  max-width: 25.6875rem;
+  width: 25.6875rem;
 }
 .DeviceList-item--large {
   max-width: 37.5rem;
 }
 .DeviceList-itemTitle {
+  --time: 15s;
+  --distance: -100%;
   overflow: hidden;
   white-space: nowrap;
   width: 100%;
   position: relative;
 }
-.DeviceList-itemTitle:after {
-  content: "";
-  display: inline-block;
-  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), white, white);
-  width: 1.375rem;
-  height: 100%;
-  position: absolute;
-  right: -0.1875rem;
+.DeviceList-itemTitle .animate {
+  animation-name: marquee;
+  animation-duration: var(--time);
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  display: block;
+}
+.DeviceList-itemTitle .animate > span {
+  margin-left: 24px;
+}
+@keyframes marquee {
+  0% {
+    transform: translate3d(0px, 0, 0);
+  }
+  70% {
+    transform: translate3d(var(--distance), 0, 0);
+  }
+  100% {
+    transform: translate3d(var(--distance), 0, 0);
+  }
 }
 
 /*# sourceMappingURL=demo.css.map */
