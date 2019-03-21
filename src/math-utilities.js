@@ -9,6 +9,6 @@ export function calculateAnimationValues(
   return {
     distance: totalWidth,
     animatedDistance: finalDistance,
-    time: time
+    time
   };
 }
