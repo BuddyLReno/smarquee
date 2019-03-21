@@ -1,0 +1,20 @@
+version: '2'
+plugins:
+  duplication:
+    enabled: true
+    checks:
+      Similar code:
+        enabled: false
+    config:
+      languages:
+        - javascript
+  eslint:
+    enabled: true
+    channel: 'eslint-4'
+    config:
+      extensions:
+        - .js
+exclude_patterns:
+  - 'tests/'
+  - 'demo/'
+  - 'dist/'
