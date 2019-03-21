@@ -1,9 +1,8 @@
 module.exports = {
-  extends: ['plugin:jest/recommended'],
+  extends: ['prettier', 'plugin:jest/recommended'],
   parser: 'babel-eslint',
   env: {
     browser: true,
-    node: true,
     es6: true
   },
   parserOptions: {
@@ -25,8 +24,7 @@ module.exports = {
       spread: true,
       superInFunctions: true,
       templateStrings: true,
-      unicodeCodePointEscapes: true,
-      jsx: true
+      unicodeCodePointEscapes: true
     }
   },
   globals: {
@@ -55,7 +53,7 @@ module.exports = {
     cy: false,
     Cypress: false
   },
-  plugins: ['babel', 'jest'],
+  plugins: ['babel', 'jest', 'prettier'],
   rules: {
     'no-cond-assign': [2, 'always'],
     'no-console': 0, // disable during development
