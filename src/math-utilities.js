@@ -1,4 +1,8 @@
-export function calculateAnimationValues(totalWidth, velocity, separatorMargin = 0) {
+export function calculateAnimationValues(
+  totalWidth,
+  velocity,
+  separatorMargin = 0
+) {
   const finalDistance = totalWidth / 2 + separatorMargin;
   const time = totalWidth / velocity;
 
@@ -6,5 +10,5 @@ export function calculateAnimationValues(totalWidth, velocity, separatorMargin =
     distance: totalWidth,
     animatedDistance: finalDistance,
     time: time
-  }
+  };
 }

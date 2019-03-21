@@ -3,7 +3,6 @@ import * as htmlUtils from './html-utilities';
 import * as mathUtils from './math-utilities';
 
 export default class Smarquee {
-
   constructor(options = {}) {
     this.settings = Object.assign({}, defaults, options);
 
@@ -11,7 +10,7 @@ export default class Smarquee {
       distance: 0,
       animatedDistance: 0,
       time: 0
-    }
+    };
 
     if (this.settings.element) {
       this.marqueeContainer = this.settings.element;
@@ -23,7 +22,9 @@ export default class Smarquee {
   }
 
   get needsMarquee() {
-    return this.marqueeContainer.scrollWidth > this.marqueeContainer.clientWidth;
+    return (
+      this.marqueeContainer.scrollWidth > this.marqueeContainer.clientWidth
+    );
   }
 
   init() {
@@ -34,14 +35,27 @@ export default class Smarquee {
   }
 
   createScrollTitle() {
-    this.scrollWrapper = htmlUtils.createScrollTitle(this.originalMarqueeContent, this.marqueeContainer);
+    this.scrollWrapper = htmlUtils.createScrollTitle(
+      this.originalMarqueeContent,
+      this.marqueeContainer
+    );
   }
 
   setAnimationProperties() {
-    this.animationCalulations = mathUtils.calculateAnimationValues(this.marqueeContainer.scrollWidth, this.settings.velocity, this.settings.scrollingTitleMargin);
+    this.animationCalulations = mathUtils.calculateAnimationValues(
+      this.marqueeContainer.scrollWidth,
+      this.settings.velocity,
+      this.settings.scrollingTitleMargin
+    );
 
-    this.marqueeContainer.style.setProperty('--time', `${this.animationCalulations.time}s`);
-    this.marqueeContainer.style.setProperty('--distance', `-${this.animationCalulations.animatedDistance}px`);
+    this.marqueeContainer.style.setProperty(
+      '--time',
+      `${this.animationCalulations.time}s`
+    );
+    this.marqueeContainer.style.setProperty(
+      '--distance',
+      `-${this.animationCalulations.animatedDistance}px`
+    );
   }
 
   activateAnimation() {

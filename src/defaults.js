@@ -3,4 +3,4 @@ export default {
   element: null,
   velocity: 50,
   scrollingTitleMargin: 24
-}
+};

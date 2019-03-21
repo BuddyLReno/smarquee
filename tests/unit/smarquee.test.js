@@ -28,8 +28,12 @@ test('needsMarquee returns true when when scrollWidth is larger than displayed w
   `;
 
   let subject = new Smarquee();
-  jest.spyOn(subject.marqueeContainer, 'scrollWidth', 'get').mockReturnValue(100);
-  jest.spyOn(subject.marqueeContainer, 'clientWidth', 'get').mockReturnValue(10);
+  jest
+    .spyOn(subject.marqueeContainer, 'scrollWidth', 'get')
+    .mockReturnValue(100);
+  jest
+    .spyOn(subject.marqueeContainer, 'clientWidth', 'get')
+    .mockReturnValue(10);
   expect(subject.needsMarquee).toBe(true);
 });
 
@@ -39,8 +43,12 @@ test('needsMarquee returns false when when scrollWidth is equal or less than dis
   `;
 
   let subject = new Smarquee();
-  jest.spyOn(subject.marqueeContainer, 'scrollWidth', 'get').mockReturnValue(10);
-  jest.spyOn(subject.marqueeContainer, 'clientWidth', 'get').mockReturnValue(10);
+  jest
+    .spyOn(subject.marqueeContainer, 'scrollWidth', 'get')
+    .mockReturnValue(10);
+  jest
+    .spyOn(subject.marqueeContainer, 'clientWidth', 'get')
+    .mockReturnValue(10);
   expect(subject.needsMarquee).toBe(false);
 });
 

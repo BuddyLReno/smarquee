@@ -10,7 +10,18 @@
     "test": "jest",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
     "build:demo": "sass src/stylesheets/demo.scss demo/demo.css",
-    "build": "yarn run build:demo"
+    "build": "yarn run build:demo",
+    "lint-staged": "lint-staged",
+    "prettier-all": "prettier --write '{src,tests}/**/*.js'"
+  },
+  "pre-commit": [
+    "lint-staged"
+  ],
+  "lint-staged": {
+    "{src, tests}/**/*.js": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -27,7 +38,10 @@
     "babel-loader": "^8.0.5",
     "browser-sync": "^2.26.3",
     "jest": "^24.5.0",
+    "lint-staged": "^8.1.5",
+    "pre-commit": "^1.2.2",
     "prepack-webpack-plugin": "^1.1.2",
+    "prettier": "^1.16.4",
     "sass": "^1.17.0",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"

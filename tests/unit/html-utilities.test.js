@@ -8,5 +8,7 @@ test('createScrollingContent adds duplicated content for scrolling', () => {
 
   const result = htmlUtils.createScrollTitle(subject.innerHTML, subject);
 
-  expect(subject.innerHTML).toBe('<span data-smarquee-scroll-wrapper="">This is a test title.<span data-smarquee-scroll-title="">This is a test title.</span></span>');
+  expect(subject.innerHTML).toBe(
+    '<span data-smarquee-scroll-wrapper="">This is a test title.<span data-smarquee-scroll-title="">This is a test title.</span></span>'
+  );
 });
