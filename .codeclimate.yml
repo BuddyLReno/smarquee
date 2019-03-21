@@ -10,7 +10,6 @@ plugins:
         - javascript
   eslint:
     enabled: true
-    channel: 'eslint-5'
     config:
       extensions:
         - .js
