@@ -8,6 +8,7 @@
   "scripts": {
     "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js && cp dist/smarquee.min.js demo",
     "test": "jest",
+    "test-ci": "TZ='utc' jest --no-cache --coverage -w=4",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
     "build:demo": "sass src/stylesheets/demo.scss demo/demo.css",
     "build": "yarn run build:demo",
