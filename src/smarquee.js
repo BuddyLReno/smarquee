@@ -31,6 +31,7 @@ export default class Smarquee {
     if (this.needsMarquee) {
       this.createScrollTitle();
       this.setAnimationProperties();
+      this.activateAnimation();
     }
   }
 
