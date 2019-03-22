@@ -28,7 +28,9 @@ export default class Smarquee {
   }
 
   async init() {
-    if (!this.needsMarquee) {return;}
+    if (!this.needsMarquee) {
+      return;
+    }
 
     await this.createScrollTitle();
     await this.calculateAnimationProperties();

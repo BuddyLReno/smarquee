@@ -1,6 +1,5 @@
 # Supported Browsers
 
-> 2%
-last 2 versions
+> 2% and last 2 versions
 safari >= 10
-not ie < 11
+not ie <= 11
