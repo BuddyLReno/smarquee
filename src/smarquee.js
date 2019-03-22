@@ -29,26 +29,30 @@ export default class Smarquee {
 
   init() {
     if (this.needsMarquee) {
-      this.createScrollTitle();
-      this.setAnimationProperties();
-      this.activateAnimation();
+      this.createScrollTitle().then(() => {
+        this.calculateAnimationProperties();
+        this.setAnimationProperties();
+        this.activateAnimation();
+      });
     }
   }
 
-  createScrollTitle() {
+  async createScrollTitle() {
     this.scrollWrapper = htmlUtils.createScrollTitle(
       this.originalMarqueeContent,
       this.marqueeContainer
     );
   }
 
-  setAnimationProperties() {
+  calculateAnimationProperties() {
     this.animationCalulations = mathUtils.calculateAnimationValues(
       this.marqueeContainer.scrollWidth,
       this.settings.velocity,
       this.settings.scrollingTitleMargin
     );
+  }
 
+  setAnimationProperties() {
     this.marqueeContainer.style.setProperty(
       '--time',
       `${this.animationCalulations.time}s`
