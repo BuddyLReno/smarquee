@@ -1,5 +1,5 @@
-@import "vendor/scut";
-@import "vendor/normalize";
+@import 'vendor/scut';
+@import 'vendor/normalize';
 
 .DeviceList {
   display: flex;
@@ -26,24 +26,6 @@
   }
 
   &-itemTitle {
-    --time: 15s;
-    --distance: -100%;
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    position: relative;
-
-    .animate {
-      animation-name: marquee;
-      animation-duration: var(--time);
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      display: block;
-      > span {
-        margin-left: 24px;
-      }
-    }
-
     @keyframes marquee {
       0% {
         transform: translate3d(0px, 0, 0);

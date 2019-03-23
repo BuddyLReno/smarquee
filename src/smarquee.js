@@ -1,6 +1,7 @@
 import defaults from './defaults';
 import * as htmlUtils from './html-utilities';
 import * as mathUtils from './math-utilities';
+import * as cssUtils from './css-utilities';
 
 export default class Smarquee {
   constructor(options = {}) {
@@ -13,6 +14,7 @@ export default class Smarquee {
     };
 
     this.id = mathUtils.generateHash();
+    this.styleBlock = null;
 
     if (this.settings.element) {
       this.marqueeContainer = this.settings.element;
@@ -20,7 +22,13 @@ export default class Smarquee {
       this.marqueeContainer = document.querySelector(this.settings.selector);
     }
 
+    this.marqueeContainer.classList.add('Smarquee', `Smarquee--${this.id}`);
     this.originalMarqueeContent = this.marqueeContainer.innerHTML;
+
+    this.styleBlock = htmlUtils.appendStyleBlock(
+      cssUtils.buildStyle(this.id, 15, 0),
+      this.id
+    );
   }
 
   get needsMarquee() {

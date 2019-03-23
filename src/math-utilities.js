@@ -14,7 +14,11 @@ export function calculateAnimationValues(
 }
 
 export function generateHash() {
-  return Math.random()
-    .toString(36)
-    .substring(2, 15);
+  let randomLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+  return (
+    randomLetter +
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  );
 }

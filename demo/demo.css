@@ -368,24 +368,6 @@ template {
 .DeviceList-item--large {
   max-width: 37.5rem;
 }
-.DeviceList-itemTitle {
-  --time: 15s;
-  --distance: -100%;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 100%;
-  position: relative;
-}
-.DeviceList-itemTitle .animate {
-  animation-name: marquee;
-  animation-duration: var(--time);
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  display: block;
-}
-.DeviceList-itemTitle .animate > span {
-  margin-left: 24px;
-}
 @keyframes marquee {
   0% {
     transform: translate3d(0px, 0, 0);

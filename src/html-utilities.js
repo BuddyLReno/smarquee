@@ -5,3 +5,11 @@ export function createScrollTitle(contentToInsert, container) {
 
   return container.querySelector('[data-smarquee-scroll-wrapper]');
 }
+
+export function appendStyleBlock(styles, id) {
+  let styleBlock = document.createElement('style');
+  styleBlock.id = id;
+  styleBlock.appendChild(document.createTextNode(styles));
+  document.head.appendChild(styleBlock);
+  return document.head.querySelector(`#${id}`);
+}

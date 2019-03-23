@@ -2,7 +2,7 @@ import Smarquee from '../../src/smarquee';
 import MathUtils from '../../src/math-utilities';
 jest.mock('../../src/math-utilities', () => ({
   generateHash: () => {
-    return '12345';
+    return 'ABC123';
   },
   calculateAnimationValues: () => {
     return {
@@ -106,5 +106,30 @@ test('id is set in the constructor', () => {
   `;
 
   let subject = new Smarquee();
-  expect(subject.id).toBe('12345');
+  expect(subject.id).toBe('ABC123');
+});
+
+test('styleBlock is created during init', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  expect(subject.styleBlock.id).toBe('ABC123');
+  expect(document.head.querySelector('#ABC123').tagName.toLowerCase()).toBe(
+    'style'
+  );
+});
+
+test('Smarquee has a unique class attached', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+
+  expect(subject.marqueeContainer.classList).toContain('Smarquee');
+  expect(subject.marqueeContainer.classList).toContain('Smarquee--ABC123');
 });

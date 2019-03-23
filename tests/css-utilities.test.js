@@ -1,15 +1,18 @@
-export function buildStyle(id, time, distance) {
-  let style = `
-  .Smarquee.Smarquee--${id} {
-    --time: ${time}s;
-    --distance: -${distance}px;
+import * as cssUtils from '../src/css-utilities';
+
+test('buildStyle returns the expected default style', () => {
+  let subject = cssUtils.buildStyle('abc123', '23', '233');
+  expect(subject).toBe(`
+  .Smarquee.Smarquee--abc123 {
+    --time: 23s;
+    --distance: -233px;
     overflow: hidden;
     white-space: nowrap;
     width: 100%;
     position: relative;
   }
   
-  .Smarquee--${id} .animate {
+  .Smarquee--abc123 .animate {
     animation-name: marquee;
     animation-duration: var(--time);
     animation-timing-function: linear;
@@ -17,7 +20,7 @@ export function buildStyle(id, time, distance) {
     display: block;
   }
   
-  .Smarquee--${id} .animate > span {
+  .Smarquee--abc123 .animate > span {
     margin-left: 24px;
   }
   
@@ -32,6 +35,5 @@ export function buildStyle(id, time, distance) {
       transform: translate3d(var(--distance), 0, 0);
     }
   }
-  `;
-  return style;
-}
+  `);
+});

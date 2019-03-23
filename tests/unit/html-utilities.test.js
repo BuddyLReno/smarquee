@@ -12,3 +12,14 @@ test('createScrollingContent adds duplicated content for scrolling', () => {
     '<span data-smarquee-scroll-wrapper="">This is a test title.<span data-smarquee-scroll-title="">This is a test title.</span></span>'
   );
 });
+
+test('appendStyleBlock adds a style block to the document head', () => {
+  let subject = htmlUtils.appendStyleBlock(
+    '.test { display: block; }',
+    'ABC123'
+  );
+
+  expect(subject.id).toBe('ABC123');
+  expect(subject.tagName.toLowerCase()).toBe('style');
+  expect(subject.innerHTML).toBe('.test { display: block; }');
+});
