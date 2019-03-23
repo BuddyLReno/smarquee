@@ -25,7 +25,7 @@ plugins.push(
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
-    Smarquee: './src/smarquee.js'
+    smarquee: './src/smarquee.js'
   },
   output: {
     path: __dirname + '/dist',
@@ -39,12 +39,11 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          compact: true
-        }
+        loader: 'babel-loader'
       }
     ]
   },
-  plugins
+  optimization: {
+    minimize: false
+  }
 };

@@ -12,3 +12,9 @@ export function calculateAnimationValues(
     time
   };
 }
+
+export function generateHash() {
+  return Math.random()
+    .toString(36)
+    .substring(2, 15);
+}

@@ -12,6 +12,8 @@ export default class Smarquee {
       time: 0
     };
 
+    this.id = mathUtils.generateHash();
+
     if (this.settings.element) {
       this.marqueeContainer = this.settings.element;
     } else {
@@ -27,25 +29,25 @@ export default class Smarquee {
     );
   }
 
-  async init() {
-    if (!this.needsMarquee) {
+  init() {
+    if (this.needsMarquee === false) {
       return;
     }
 
-    await this.createScrollTitle();
-    await this.calculateAnimationProperties();
-    await this.setAnimationProperties();
+    this.createScrollTitle();
+    this.calculateAnimationProperties();
+    this.setAnimationProperties();
     this.activate();
   }
 
-  async createScrollTitle() {
+  createScrollTitle() {
     this.scrollWrapper = htmlUtils.createScrollTitle(
       this.originalMarqueeContent,
       this.marqueeContainer
     );
   }
 
-  async calculateAnimationProperties() {
+  calculateAnimationProperties() {
     this.animationCalulations = mathUtils.calculateAnimationValues(
       this.marqueeContainer.scrollWidth,
       this.settings.velocity,
@@ -53,7 +55,7 @@ export default class Smarquee {
     );
   }
 
-  async setAnimationProperties() {
+  setAnimationProperties() {
     this.marqueeContainer.style.setProperty(
       '--time',
       `${this.animationCalulations.time}s`

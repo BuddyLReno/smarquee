@@ -1,4 +1,17 @@
 import Smarquee from '../../src/smarquee';
+import MathUtils from '../../src/math-utilities';
+jest.mock('../../src/math-utilities', () => ({
+  generateHash: () => {
+    return '12345';
+  },
+  calculateAnimationValues: () => {
+    return {
+      distance: 200,
+      animatedDistance: 100,
+      time: 30
+    };
+  }
+}));
 
 test('element with id smarquee is selected in constructor', () => {
   document.body.innerHTML = `
@@ -62,4 +75,36 @@ test('init adds scrolling content if needsMarquee is true', () => {
   jest.spyOn(subject, 'createScrollTitle');
   subject.init();
   expect(subject.createScrollTitle).toHaveBeenCalled();
+});
+
+test('activate adds the activate class', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  expect(subject.scrollWrapper.classList).toContain('animate');
+});
+
+test('deactivate remove the activate class', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  subject.deactivate();
+  expect(subject.scrollWrapper.classList).not.toContain('animate');
+});
+
+test('id is set in the constructor', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+  expect(subject.id).toBe('12345');
 });

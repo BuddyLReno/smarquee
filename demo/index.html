@@ -1,36 +1,25 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <title>Smarquee Demo</title>
+    <link rel="stylesheet" type="text/css" href="demo.css" />
+  </head>
 
-<head>
-  <title>Smarquee Demo</title>
-  <link rel="stylesheet" type="text/css" href="demo.css">
-</head>
+  <body>
+    <h1>Smarquee Demo</h1>
 
-<body>
-  <h1>Smarquee Demo</h1>
-
-  <div class="DeviceList">
-    <div class="DeviceList-item DeviceList-item--medium">
-      <h2 id="smarquee" class="DeviceList-itemTitle">
-        Forget Not Your First Love
-      </h2>
+    <div class="DeviceList">
+      <div class="DeviceList-item DeviceList-item--large">
+        <h2 id="smarquee" class="DeviceList-itemTitle">
+          Everything Is Alive, Everything Is Breathing, Nothing Is Dead, Nothing
+          Is Bleeding.
+        </h2>
+      </div>
     </div>
-    <div class="DeviceList-item DeviceList-item--large">
-      <h2 id="smarquee2" class="DeviceList-itemTitle">
-        Everything Is Alive, Everything Is Breathing, Nothing Is Dead, Nothing Is Bleeding.
-      </h2>
-    </div>
-  </div>
-  <script type="text/javascript" src="smarquee.min.js"></script>
-  <script type="text/javascript">
-    const smarquee = new Smarquee();
-
-
-    const smarquee2 = new Smarquee({
-      element: document.querySelector('#smarquee2')
-    });
-    smarquee2.init();
-  </script>
-</body>
-
+    <script type="text/javascript" src="smarquee.min.js"></script>
+    <script type="text/javascript">
+      const smarquee = new Smarquee();
+      smarquee.init();
+    </script>
+  </body>
 </html>
