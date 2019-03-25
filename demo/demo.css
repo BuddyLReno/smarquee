@@ -368,16 +368,5 @@ template {
 .DeviceList-item--large {
   max-width: 37.5rem;
 }
-@keyframes marquee {
-  0% {
-    transform: translate3d(0px, 0, 0);
-  }
-  70% {
-    transform: translate3d(var(--distance), 0, 0);
-  }
-  100% {
-    transform: translate3d(var(--distance), 0, 0);
-  }
-}
 
 /*# sourceMappingURL=demo.css.map */
