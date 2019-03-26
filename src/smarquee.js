@@ -1,3 +1,4 @@
+import 'web-animations-js/web-animations-next-lite.min';
 import defaults from './defaults';
 import * as htmlUtils from './html-utilities';
 import * as mathUtils from './math-utilities';
@@ -26,7 +27,7 @@ export default class Smarquee {
     this.originalMarqueeContent = this.marqueeContainer.innerHTML;
 
     this.styleBlock = htmlUtils.appendStyleBlock(
-      cssUtils.buildStyle(this.id, 15, 0),
+      cssUtils.buildStyle(this.id, this.settings.scrollingTitleMargin),
       this.id
     );
   }
@@ -37,15 +38,17 @@ export default class Smarquee {
     );
   }
 
-  init() {
+  init(start = false) {
     if (this.needsMarquee === false) {
       return;
     }
 
     this.createScrollTitle();
     this.calculateAnimationProperties();
-    this.setAnimationProperties();
-    this.activate();
+    this.animation = this.createAnimation();
+    if (start) {
+      this.play();
+    }
   }
 
   createScrollTitle() {
@@ -63,22 +66,34 @@ export default class Smarquee {
     );
   }
 
-  setAnimationProperties() {
-    this.marqueeContainer.style.setProperty(
-      '--time',
-      `${this.animationCalulations.time}s`
+  createAnimation() {
+    let keyframesScrolling = [
+      { transform: 'translate3d(0px, 0, 0)' },
+      {
+        transform: `translate3d(-${
+          this.animationCalulations.animatedDistance
+        }px, 0, 0)`
+      }
+    ];
+
+    let kfeScrolling = new KeyframeEffect(
+      this.scrollWrapper,
+      keyframesScrolling,
+      {
+        duration: this.animationCalulations.time * 1000,
+        fill: 'both',
+        delay: this.settings.pauseTime
+      }
     );
-    this.marqueeContainer.style.setProperty(
-      '--distance',
-      `-${this.animationCalulations.animatedDistance}px`
-    );
+
+    return new Animation(kfeScrolling, document.timeline);
   }
 
-  activate() {
-    this.scrollWrapper.classList.add('animate');
+  play() {
+    this.animation.play();
   }
 
-  deactivate() {
-    this.scrollWrapper.classList.remove('animate');
+  pause() {
+    this.animation.pause();
   }
 }

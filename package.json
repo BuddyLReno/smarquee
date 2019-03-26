@@ -37,6 +37,11 @@
     "url": "https://github.com/BuddyLReno/smarquee/issues"
   },
   "homepage": "https://github.com/BuddyLReno/smarquee#readme",
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.3",
@@ -52,6 +57,7 @@
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-prettier": "^3.0.1",
     "jest": "^24.5.0",
+    "jest-canvas-mock": "^2.0.0-beta.1",
     "lint-staged": "^8.1.5",
     "nodemon": "^1.18.10",
     "pre-commit": "^1.2.2",
@@ -61,5 +67,7 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "web-animations-js": "^2.3.1"
+  }
 }

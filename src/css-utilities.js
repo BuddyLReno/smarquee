@@ -1,37 +1,13 @@
-export function buildStyle(id, time, distance) {
+export function buildStyle(id, margin) {
   let style = `
-  .Smarquee.Smarquee--${id} {
-    --time: ${time}s;
-    --distance: -${distance}px;
+  .Smarquee--${id} {
     overflow: hidden;
     white-space: nowrap;
-    width: 100%;
-    position: relative;
   }
-  
-  .Smarquee--${id} .animate {
-    animation-name: marquee;
-    animation-duration: var(--time);
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    display: block;
+
+  .Smarquee--${id} [data-smarquee-scroll-title] {
+    margin-left: ${margin}px;
   }
-  
-  .Smarquee--${id} .animate > span {
-    margin-left: 24px;
-  }
-  
-  @keyframes marquee {
-    0% {
-      transform: translate3d(0px, 0, 0);
-    }
-    70% {
-      transform: translate3d(var(--distance), 0, 0);
-    }
-    100% {
-      transform: translate3d(var(--distance), 0, 0);
-    }
-  }
-  `;
+`;
   return style;
 }

@@ -77,29 +77,6 @@ test('init adds scrolling content if needsMarquee is true', () => {
   expect(subject.createScrollTitle).toHaveBeenCalled();
 });
 
-test('activate adds the activate class', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
-  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
-  subject.init();
-  expect(subject.scrollWrapper.classList).toContain('animate');
-});
-
-test('deactivate remove the activate class', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
-  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
-  subject.init();
-  subject.deactivate();
-  expect(subject.scrollWrapper.classList).not.toContain('animate');
-});
-
 test('id is set in the constructor', () => {
   document.body.innerHTML = `
   <h1 id="smarquee">This is a title.</h1>

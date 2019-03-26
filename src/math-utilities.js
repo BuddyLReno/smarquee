@@ -3,7 +3,7 @@ export function calculateAnimationValues(
   velocity,
   separatorMargin = 0
 ) {
-  const finalDistance = totalWidth / 2 + separatorMargin;
+  const finalDistance = totalWidth / 2 + separatorMargin / 2 + 2; // 2px kerning
   const time = totalWidth / velocity;
 
   return {

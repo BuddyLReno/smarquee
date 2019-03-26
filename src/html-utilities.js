@@ -1,5 +1,5 @@
 export function createScrollTitle(contentToInsert, container) {
-  const scrollContent = `<span data-smarquee-scroll-wrapper>${contentToInsert}<span data-smarquee-scroll-title>${contentToInsert}</span></span>`;
+  const scrollContent = `<div data-smarquee-scroll-wrapper>${contentToInsert}<span data-smarquee-scroll-title>${contentToInsert}</span></div>`;
 
   container.innerHTML = scrollContent;
 
