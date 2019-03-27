@@ -1,11 +1,11 @@
-import defaults from './defaults';
+import { defaults, styleOptions } from './defaults';
 import * as htmlUtils from './html-utilities';
 import * as mathUtils from './math-utilities';
 import * as cssUtils from './css-utilities';
 
 export default class Smarquee {
   constructor(options = {}) {
-    this.settings = Object.assign({}, defaults, options);
+    this.assignSettings(options);
 
     this.animationCalulations = {
       distance: 0,
@@ -26,8 +26,17 @@ export default class Smarquee {
     this.originalMarqueeContent = this.marqueeContainer.innerHTML;
 
     this.styleBlock = htmlUtils.appendStyleBlock(
-      cssUtils.buildStyle(this.id, this.settings.scrollingTitleMargin),
+      cssUtils.buildStyle(this.id, this.settings.styleOptions),
       this.id
+    );
+  }
+
+  assignSettings(options) {
+    this.settings = Object.assign({}, defaults, options);
+    this.settings.styleOptions = Object.assign(
+      {},
+      styleOptions,
+      options.hasOwnProperty('styleOptions') ? options.styleOptions : {}
     );
   }
 
@@ -37,7 +46,7 @@ export default class Smarquee {
     );
   }
 
-  init(start = false) {
+  init(start = true) {
     if (this.needsMarquee === false) {
       return;
     }
@@ -62,18 +71,15 @@ export default class Smarquee {
     this.animationCalulations = mathUtils.calculateAnimationValues(
       this.marqueeContainer.scrollWidth,
       this.settings.velocity,
-      this.settings.scrollingTitleMargin
+      this.settings.styleOptions.scrollingTitleMargin
     );
   }
 
   setAnimationProperties() {
-    this.marqueeContainer.style.setProperty(
-      '--time',
-      `${this.animationCalulations.time}s`
-    );
-    this.marqueeContainer.style.setProperty(
-      '--distance',
-      `-${this.animationCalulations.animatedDistance}px`
+    cssUtils.setAnimationProperties(
+      this.marqueeContainer,
+      this.animationCalulations.time,
+      this.animationCalulations.animatedDistance
     );
   }
 
@@ -83,5 +89,29 @@ export default class Smarquee {
 
   deactivate() {
     this.scrollWrapper.classList.remove('animate');
+  }
+
+  restart() {
+    this.deactivate();
+    setTimeout(() => {
+      this.activate();
+    }, 500);
+  }
+
+  play() {
+    cssUtils.updatePlayState(this.scrollWrapper, 'running');
+  }
+
+  pause() {
+    cssUtils.updatePlayState(this.scrollWrapper, 'paused');
+  }
+
+  updateText(text, delay = 0, start = true) {
+    this.deactivate();
+    this.originalMarqueeContent = this.marqueeContainer.innerHTML = text;
+
+    setTimeout(() => {
+      this.init(start);
+    }, delay);
   }
 }

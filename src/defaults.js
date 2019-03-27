@@ -1,7 +1,16 @@
-export default {
+export let defaults = {
   selector: '#smarquee',
   element: null,
-  velocity: 50,
+  velocity: 50
+};
+
+export const styleOptions = {
   scrollingTitleMargin: 24,
-  pauseTime: 4000
+  animationName: 'marquee',
+  timingFunction: 'linear',
+  iterationCount: 'infinite',
+  pausePercent: 30,
+  direction: 'normal',
+  fillMode: 'none',
+  playState: 'running'
 };

@@ -1,4 +1,5 @@
 import Smarquee from '../../src/smarquee';
+import * as cssUtils from '../../src/css-utilities';
 jest.mock('../../src/math-utilities', () => ({
   generateHash: () => 'ABC123',
   calculateAnimationValues: () => ({
@@ -8,12 +9,14 @@ jest.mock('../../src/math-utilities', () => ({
   })
 }));
 
-test('element with id smarquee is selected in constructor', () => {
-  document.body.innerHTML = `
-  <div id="smarquee">Some title</div>
-  `;
+let subject = null;
+beforeEach(() => {
+  document.body.innerHTML = `<div id="smarquee">A test title</div>`;
 
-  const subject = new Smarquee();
+  subject = new Smarquee();
+});
+
+test('element with id smarquee is selected in constructor', () => {
   expect(subject.marqueeContainer.id).toBe('smarquee');
 });
 
@@ -22,7 +25,7 @@ test('preselected element is set to marqueeContainer on init', () => {
   <div id="smarquee2">a test title</div>
   `;
 
-  const subject = new Smarquee({
+  let subject = new Smarquee({
     element: document.querySelector('#smarquee2')
   });
 
@@ -30,12 +33,35 @@ test('preselected element is set to marqueeContainer on init', () => {
   expect(subject.marqueeContainer.innerHTML).toBe('a test title');
 });
 
-test('needsMarquee returns true when when scrollWidth is larger than displayed width', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a long test title that needs a marquee</h1>
-  `;
+test('settings object returns with default properties', () => {
+  expect(subject.settings).toMatchObject({
+    selector: '#smarquee',
+    element: null,
+    velocity: 50,
+    styleOptions: {
+      scrollingTitleMargin: 24,
+      animationName: 'marquee',
+      timingFunction: 'linear',
+      iterationCount: 'infinite',
+      pausePercent: 30,
+      direction: 'normal',
+      fillMode: 'none',
+      playState: 'running'
+    }
+  });
+});
 
-  let subject = new Smarquee();
+test('settings object can override styleOptions', () => {
+  let subject = new Smarquee({
+    styleOptions: {
+      scrollingTitleMargin: 36
+    }
+  });
+
+  expect(subject.settings.styleOptions.scrollingTitleMargin).toBe(36);
+});
+
+test('needsMarquee returns true when when scrollWidth is larger than displayed width', () => {
   jest
     .spyOn(subject.marqueeContainer, 'scrollWidth', 'get')
     .mockReturnValue(100);
@@ -46,11 +72,6 @@ test('needsMarquee returns true when when scrollWidth is larger than displayed w
 });
 
 test('needsMarquee returns false when when scrollWidth is equal or less than displayed width', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a long test title that needs a marquee</h1>
-  `;
-
-  let subject = new Smarquee();
   jest
     .spyOn(subject.marqueeContainer, 'scrollWidth', 'get')
     .mockReturnValue(10);
@@ -61,11 +82,6 @@ test('needsMarquee returns false when when scrollWidth is equal or less than dis
 });
 
 test('init adds scrolling content if needsMarquee is true', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a long test title that needs a marquee</h1>
-  `;
-
-  let subject = new Smarquee();
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   jest.spyOn(subject, 'createScrollTitle');
   subject.init();
@@ -73,20 +89,10 @@ test('init adds scrolling content if needsMarquee is true', () => {
 });
 
 test('id is set in the constructor', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
   expect(subject.id).toBe('ABC123');
 });
 
 test('styleBlock is created during init', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   subject.init();
   expect(subject.styleBlock.id).toBe('ABC123');
@@ -96,35 +102,83 @@ test('styleBlock is created during init', () => {
 });
 
 test('Smarquee has a unique class attached', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
-
   expect(subject.marqueeContainer.classList).toContain('Smarquee');
   expect(subject.marqueeContainer.classList).toContain('Smarquee--ABC123');
 });
 
 test('activate adds the activate class', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   subject.init(true);
   expect(subject.scrollWrapper.classList).toContain('animate');
 });
 
 test('deactivate remove the activate class', () => {
-  document.body.innerHTML = `
-  <h1 id="smarquee">This is a title.</h1>
-  `;
-
-  let subject = new Smarquee();
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   subject.init();
   subject.deactivate();
   expect(subject.scrollWrapper.classList).not.toContain('animate');
+});
+
+test('restart removes active and readds after a short period', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(subject, 'activate');
+  jest.spyOn(subject, 'deactivate');
+  subject.init();
+  subject.restart();
+  expect(subject.activate).toHaveBeenCalled();
+  expect(subject.deactivate).toHaveBeenCalled();
+});
+
+test('play updates playState with running', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updatePlayState');
+
+  subject.init();
+  subject.play();
+
+  expect(cssUtils.updatePlayState).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    'running'
+  );
+});
+
+test('pause updates playState with paused', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updatePlayState');
+
+  subject.init();
+  subject.pause();
+
+  expect(cssUtils.updatePlayState).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    'paused'
+  );
+});
+
+test('updateText updates the innerHtml with the new text', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  expect(subject.originalMarqueeContent).toBe('A test title');
+  expect(subject.marqueeContainer.innerHTML).toContain('A test title');
+  subject.updateText('A new title');
+  expect(subject.originalMarqueeContent).toBe('A new title');
+  expect(subject.marqueeContainer.innerHTML).toContain('A new title');
+});
+
+test('updateText deactivates the animation', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(subject, 'deactivate');
+  subject.init();
+  subject.updateText('A new title');
+  expect(subject.deactivate).toHaveBeenCalled();
+});
+
+test('updateText reinits with a delay if given', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.useFakeTimers();
+  subject.init();
+  subject.updateText('A new title', 2000);
+
+  expect(setTimeout).toHaveBeenCalledTimes(1);
+  expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000);
 });
