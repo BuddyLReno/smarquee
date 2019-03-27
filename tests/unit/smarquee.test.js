@@ -1,16 +1,11 @@
 import Smarquee from '../../src/smarquee';
-import MathUtils from '../../src/math-utilities';
 jest.mock('../../src/math-utilities', () => ({
-  generateHash: () => {
-    return 'ABC123';
-  },
-  calculateAnimationValues: () => {
-    return {
-      distance: 200,
-      animatedDistance: 100,
-      time: 30
-    };
-  }
+  generateHash: () => 'ABC123',
+  calculateAnimationValues: () => ({
+    distance: 200,
+    animatedDistance: 100,
+    time: 30
+  })
 }));
 
 test('element with id smarquee is selected in constructor', () => {
@@ -109,4 +104,27 @@ test('Smarquee has a unique class attached', () => {
 
   expect(subject.marqueeContainer.classList).toContain('Smarquee');
   expect(subject.marqueeContainer.classList).toContain('Smarquee--ABC123');
+});
+
+test('activate adds the activate class', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init(true);
+  expect(subject.scrollWrapper.classList).toContain('animate');
+});
+
+test('deactivate remove the activate class', () => {
+  document.body.innerHTML = `
+  <h1 id="smarquee">This is a title.</h1>
+  `;
+
+  let subject = new Smarquee();
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  subject.deactivate();
+  expect(subject.scrollWrapper.classList).not.toContain('animate');
 });

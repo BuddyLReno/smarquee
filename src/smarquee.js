@@ -1,4 +1,3 @@
-import 'web-animations-js/web-animations-next-lite.min';
 import defaults from './defaults';
 import * as htmlUtils from './html-utilities';
 import * as mathUtils from './math-utilities';
@@ -45,9 +44,10 @@ export default class Smarquee {
 
     this.createScrollTitle();
     this.calculateAnimationProperties();
-    this.animation = this.createAnimation();
+    this.setAnimationProperties();
+
     if (start) {
-      this.play();
+      this.activate();
     }
   }
 
@@ -66,34 +66,22 @@ export default class Smarquee {
     );
   }
 
-  createAnimation() {
-    let keyframesScrolling = [
-      { transform: 'translate3d(0px, 0, 0)' },
-      {
-        transform: `translate3d(-${
-          this.animationCalulations.animatedDistance
-        }px, 0, 0)`
-      }
-    ];
-
-    let kfeScrolling = new KeyframeEffect(
-      this.scrollWrapper,
-      keyframesScrolling,
-      {
-        duration: this.animationCalulations.time * 1000,
-        fill: 'both',
-        delay: this.settings.pauseTime
-      }
+  setAnimationProperties() {
+    this.marqueeContainer.style.setProperty(
+      '--time',
+      `${this.animationCalulations.time}s`
     );
-
-    return new Animation(kfeScrolling, document.timeline);
+    this.marqueeContainer.style.setProperty(
+      '--distance',
+      `-${this.animationCalulations.animatedDistance}px`
+    );
   }
 
-  play() {
-    this.animation.play();
+  activate() {
+    this.scrollWrapper.classList.add('animate');
   }
 
-  pause() {
-    this.animation.pause();
+  deactivate() {
+    this.scrollWrapper.classList.remove('animate');
   }
 }
