@@ -48,3 +48,19 @@ export function setAnimationProperties(element, time, distance) {
 export function updatePlayState(element, value) {
   element.style.setProperty('--playState', value);
 }
+
+export function updateIterations(element, value) {
+  element.style.setProperty('--iterationCount', value);
+}
+
+export function updateDirection(element, value) {
+  element.style.setProperty('--direction', value);
+}
+
+export function updateFillMode(element, value) {
+  element.style.setProperty('--fillMode', value);
+}
+
+export function updateTimingFunction(element, value) {
+  element.style.setProperty('--timingFunction', value);
+}

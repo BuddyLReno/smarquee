@@ -182,3 +182,68 @@ test('updateText reinits with a delay if given', () => {
   expect(setTimeout).toHaveBeenCalledTimes(1);
   expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000);
 });
+
+test('udpateIterationCount updates iterations with given value', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updateIterations');
+
+  subject.init();
+  subject.updateIterationCount(3);
+
+  expect(cssUtils.updateIterations).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    3
+  );
+});
+
+test('udpateIterationCount converts NaN values to infinite', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updateIterations');
+
+  subject.init();
+  subject.updateIterationCount('google');
+
+  expect(cssUtils.updateIterations).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    'infinite'
+  );
+});
+
+test('updateDirection updates direction with given value', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updateDirection');
+
+  subject.init();
+  subject.updateDirection('backwards');
+
+  expect(cssUtils.updateDirection).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    'backwards'
+  );
+});
+
+test('updateFillMode updates direction with given value', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updateFillMode');
+
+  subject.init();
+  subject.updateFillMode('both');
+
+  expect(cssUtils.updateFillMode).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    'both'
+  );
+});
+
+test('updateTimingFunction updates direction with given value', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updateTimingFunction');
+
+  subject.init();
+  subject.updateTimingFunction('ease-in');
+
+  expect(cssUtils.updateTimingFunction).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    'ease-in'
+  );
+});

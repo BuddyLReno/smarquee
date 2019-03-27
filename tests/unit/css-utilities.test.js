@@ -32,3 +32,36 @@ test('updatePlayState updates the playState variable with selected value', () =>
     'paused'
   );
 });
+
+test('updateIterations updates the iteration variable with selected value', () => {
+  jest.spyOn(element.style, 'setProperty');
+  cssUtils.updateIterations(element, '3');
+  expect(element.style.setProperty).toHaveBeenCalledWith(
+    '--iterationCount',
+    '3'
+  );
+});
+
+test('updateDirection updates the iteration variable with selected value', () => {
+  jest.spyOn(element.style, 'setProperty');
+  cssUtils.updateDirection(element, 'backwards');
+  expect(element.style.setProperty).toHaveBeenCalledWith(
+    '--direction',
+    'backwards'
+  );
+});
+
+test('updateFillMode updates the iteration variable with selected value', () => {
+  jest.spyOn(element.style, 'setProperty');
+  cssUtils.updateFillMode(element, 'both');
+  expect(element.style.setProperty).toHaveBeenCalledWith('--fillMode', 'both');
+});
+
+test('updateTimingFunction updates the iteration variable with selected value', () => {
+  jest.spyOn(element.style, 'setProperty');
+  cssUtils.updateTimingFunction(element, 'ease-in');
+  expect(element.style.setProperty).toHaveBeenCalledWith(
+    '--timingFunction',
+    'ease-in'
+  );
+});

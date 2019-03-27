@@ -114,4 +114,23 @@ export default class Smarquee {
       this.init(start);
     }, delay);
   }
+
+  updateIterationCount(iterations) {
+    cssUtils.updateIterations(
+      this.scrollWrapper,
+      isNaN(iterations) ? 'infinite' : iterations
+    );
+  }
+
+  updateDirection(direction) {
+    cssUtils.updateDirection(this.scrollWrapper, direction);
+  }
+
+  updateFillMode(fillMode) {
+    cssUtils.updateFillMode(this.scrollWrapper, fillMode);
+  }
+
+  updateTimingFunction(timingFunction) {
+    cssUtils.updateTimingFunction(this.scrollWrapper, timingFunction);
+  }
 }
