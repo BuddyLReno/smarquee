@@ -2,7 +2,7 @@ import * as cssUtils from '../../src/css-utilities';
 
 let element = null;
 beforeEach(() => {
-  document.body.innerHTML = `<h1 id="testID">Test Title</h1>`;
+  document.body.innerHTML = '<h1 id="testID">Test Title</h1>';
 
   element = document.querySelector('#testID');
 });

@@ -1,6 +1,5 @@
-export function buildStyle(id, styleOptions) {
-  let style = `
-  .Smarquee--${id} {
+function buildMainWrapper(id, styleOptions) {
+  return `.Smarquee--${id} {
     --time: 15s;
     --distance: 0;
     --timingFunction: ${styleOptions.timingFunction};
@@ -10,13 +9,17 @@ export function buildStyle(id, styleOptions) {
     --playState: ${styleOptions.playState};
     overflow: hidden;
     white-space: nowrap;
-  }
+  }`;
+}
 
-  .Smarquee--${id} [data-smarquee-scroll-title] {
+function buildScrollMargin(id, styleOptions) {
+  return `.Smarquee--${id} [data-smarquee-scroll-title] {
     margin-left: ${styleOptions.scrollingTitleMargin}px;
-  }
-  
-  .Smarquee--${id} .animate {
+  }`;
+}
+
+function buildAnimationProperties(id, styleOptions) {
+  return `.Smarquee--${id} .animate {
     animation-name: ${styleOptions.animationName};
     animation-duration: var(--time);
     animation-timing-function: var(--timingFunction);
@@ -24,9 +27,11 @@ export function buildStyle(id, styleOptions) {
     animation-direction: var(--direction);
     animation-fill-mode: var(--fillMode);
     animation-play-state: var(--playState);
-  }
-  
-  @keyframes ${styleOptions.animationName} {
+  }`;
+}
+
+function buildKeyframes(styleOptions) {
+  return `@keyframes ${styleOptions.animationName} {
     0% {
       transform: translate3d(0px, 0, 0);
     }
@@ -35,7 +40,18 @@ export function buildStyle(id, styleOptions) {
     }
     100% {
       transform: translate3d(var(--distance), 0, 0);
-    }
+    }`;
+}
+
+export function buildStyle(id, styleOptions) {
+  let style = `
+  ${buildMainWrapper(id, styleOptions)}
+
+  ${buildScrollMargin(id, styleOptions)}
+  
+  ${buildAnimationProperties(id, styleOptions)}
+  
+  ${buildKeyframes(styleOptions)}
   `;
   return style;
 }

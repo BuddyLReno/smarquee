@@ -11,7 +11,7 @@ jest.mock('../../src/math-utilities', () => ({
 
 let subject = null;
 beforeEach(() => {
-  document.body.innerHTML = `<div id="smarquee">A test title</div>`;
+  document.body.innerHTML = '<div id="smarquee">A test title</div>';
 
   subject = new Smarquee();
 });
@@ -25,7 +25,7 @@ test('preselected element is set to marqueeContainer on init', () => {
   <div id="smarquee2">a test title</div>
   `;
 
-  let subject = new Smarquee({
+  subject = new Smarquee({
     element: document.querySelector('#smarquee2')
   });
 
@@ -52,7 +52,7 @@ test('settings object returns with default properties', () => {
 });
 
 test('settings object can override styleOptions', () => {
-  let subject = new Smarquee({
+  subject = new Smarquee({
     styleOptions: {
       scrollingTitleMargin: 36
     }
