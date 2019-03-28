@@ -1,4 +1,4 @@
-import * as htmlUtils from '../../src/html-utilities';
+import * as htmlUtils from '../src/html-utilities';
 
 test('createScrollingContent adds duplicated content for scrolling', () => {
   document.body.innerHTML = `

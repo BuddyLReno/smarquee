@@ -1,5 +1,5 @@
-import Smarquee from '../../src/smarquee';
-import * as cssUtils from '../../src/css-utilities';
+import Smarquee from '../src/smarquee';
+import * as cssUtils from '../src/css-utilities';
 jest.mock('../../src/math-utilities', () => ({
   generateHash: () => 'ABC123',
   calculateAnimationValues: () => ({
@@ -59,6 +59,30 @@ test('settings object can override styleOptions', () => {
   });
 
   expect(subject.settings.styleOptions.scrollingTitleMargin).toBe(36);
+});
+
+test('assignSettings object reassigns defaults with passed in properties', () => {
+  let testObj = {
+    selector: '#smarquee',
+    element: null,
+    velocity: 50,
+    styleOptions: {
+      scrollingTitleMargin: 24,
+      animationName: 'marquee',
+      timingFunction: 'linear',
+      iterationCount: 'infinite',
+      pausePercent: 30,
+      direction: 'normal',
+      fillMode: 'none',
+      playState: 'running'
+    }
+  };
+
+  expect(subject.settings).toMatchObject(testObj);
+  subject.assignSettings({ velocity: 60, styleOptions: { pausePercent: 40 } });
+  testObj.velocity = 60;
+  testObj.styleOptions.pausePercent = 40;
+  expect(subject.settings).toMatchObject(testObj);
 });
 
 test('needsMarquee returns true when when scrollWidth is larger than displayed width', () => {

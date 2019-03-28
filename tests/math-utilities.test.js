@@ -1,4 +1,4 @@
-import * as mathUtils from '../../src/math-utilities';
+import * as mathUtils from '../src/math-utilities';
 
 test('calculates correct animated distance', () => {
   let subject = mathUtils.calculateAnimationValues(200, 50, 24);

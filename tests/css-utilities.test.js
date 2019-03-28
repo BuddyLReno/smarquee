@@ -1,4 +1,4 @@
-import * as cssUtils from '../../src/css-utilities';
+import * as cssUtils from '../src/css-utilities';
 
 let element = null;
 beforeEach(() => {
