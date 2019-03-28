@@ -17,7 +17,12 @@ export default class Smarquee {
       direction: 'normal',
       fillMode: 'none',
       playState: 'running'
-    }
+    },
+    onAnimationStart() {},
+    onAnimationIterate() {},
+    onAnimationEnd() {},
+    onAnimationCancel() {},
+    onClick() {}
   };
   animationCalulations = {
     distance: 0,
@@ -76,7 +81,7 @@ export default class Smarquee {
     }
 
     this.createScrollTitle();
-    this.setupAnimationEvents();
+    this.setupEventListeners();
     this.calculateAnimationProperties();
     this.setAnimationProperties();
 
@@ -92,14 +97,28 @@ export default class Smarquee {
     );
   }
 
-  setupAnimationEvents() {
-    this.scrollWrapper.addEventListener('animationstart', () => {
-      console.log('animation start');
-    });
+  setupEventListeners() {
+    this.scrollWrapper.addEventListener(
+      'animationstart',
+      this.settings.onAnimationStart
+    );
 
-    this.scrollWrapper.addEventListener('animationiteration', () => {
-      console.log('iterated');
-    });
+    this.scrollWrapper.addEventListener(
+      'animationiteration',
+      this.settings.onAnimationIterate
+    );
+
+    this.scrollWrapper.addEventListener(
+      'animationend',
+      this.settings.onAnimationEnd
+    );
+
+    this.scrollWrapper.addEventListener(
+      'animationcancel',
+      this.settings.onAnimationCancel
+    );
+
+    this.scrollWrapper.addEventListener('click', this.settings.onClick);
   }
 
   calculateAnimationProperties() {

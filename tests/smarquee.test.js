@@ -51,6 +51,14 @@ test('settings object returns with default properties', () => {
   });
 });
 
+test('settings object returns with default event listeners', () => {
+  expect(subject.settings).toHaveProperty('onAnimationStart');
+  expect(subject.settings).toHaveProperty('onAnimationIterate');
+  expect(subject.settings).toHaveProperty('onAnimationEnd');
+  expect(subject.settings).toHaveProperty('onAnimationCancel');
+  expect(subject.settings).toHaveProperty('onClick');
+});
+
 test('settings object can override styleOptions', () => {
   subject = new Smarquee({
     styleOptions: {
@@ -107,7 +115,7 @@ test('needsMarquee returns false when when scrollWidth is equal or less than dis
 
 test("init doesn't initiate if no marquee is needed", () => {
   jest.spyOn(subject, 'createScrollTitle');
-  jest.spyOn(subject, 'setupAnimationEvents');
+  jest.spyOn(subject, 'setupEventListeners');
   jest.spyOn(subject, 'calculateAnimationProperties');
   jest.spyOn(subject, 'setAnimationProperties');
   jest.spyOn(subject, 'activate');
@@ -115,7 +123,7 @@ test("init doesn't initiate if no marquee is needed", () => {
   subject.init();
 
   expect(subject.createScrollTitle).toHaveBeenCalledTimes(0);
-  expect(subject.setupAnimationEvents).toHaveBeenCalledTimes(0);
+  expect(subject.setupEventListeners).toHaveBeenCalledTimes(0);
   expect(subject.calculateAnimationProperties).toHaveBeenCalledTimes(0);
   expect(subject.setAnimationProperties).toHaveBeenCalledTimes(0);
   expect(subject.activate).toHaveBeenCalledTimes(0);
@@ -153,6 +161,44 @@ test('styleBlock is created during init', () => {
 test('Smarquee has a unique class attached', () => {
   expect(subject.marqueeContainer.classList).toContain('Smarquee');
   expect(subject.marqueeContainer.classList).toContain('Smarquee--ABC123');
+});
+
+test('setupEventListeners is called during init', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(subject, 'setupEventListeners');
+  subject.init();
+
+  expect(subject.setupEventListeners).toHaveBeenCalledTimes(1);
+});
+
+test('setupEventListeners attaches events to scrollWrapper', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  jest.spyOn(subject.scrollWrapper, 'addEventListener');
+  subject.setupEventListeners();
+
+  expect(subject.scrollWrapper.addEventListener).toHaveBeenCalledTimes(5);
+
+  expect(subject.scrollWrapper.addEventListener).toHaveBeenCalledWith(
+    'animationstart',
+    subject.settings.onAnimationStart
+  );
+  expect(subject.scrollWrapper.addEventListener).toHaveBeenCalledWith(
+    'animationiteration',
+    subject.settings.onAnimationIterate
+  );
+  expect(subject.scrollWrapper.addEventListener).toHaveBeenCalledWith(
+    'animationend',
+    subject.settings.onAnimationEnd
+  );
+  expect(subject.scrollWrapper.addEventListener).toHaveBeenCalledWith(
+    'animationcancel',
+    subject.settings.onAnimationCancel
+  );
+  expect(subject.scrollWrapper.addEventListener).toHaveBeenCalledWith(
+    'click',
+    subject.settings.onClick
+  );
 });
 
 test('activate adds the activate class', () => {
