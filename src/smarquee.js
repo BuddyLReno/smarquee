@@ -76,28 +76,6 @@ export default class Smarquee {
     this.originalMarqueeContent = this.marqueeContainer.innerHTML;
   }
 
-  // checkNeedsMarquee() {
-  //   if (this.needsMarquee) {
-  //     this.init(true);
-  //   } else {
-  //     this
-  //   }
-  //   // resize ticker
-  //   this.resizeListenerTicking = false;
-  // }
-
-  // onResize() {
-  //   if (!this.resizeListenerTicking) {
-  //     window.requestAnimationFrame(this.checkNeedsMarquee);
-  //   }
-
-  //   this.resizeListenerTicking = true;
-  // }
-
-  // setupResizeListener() {
-  //   window.addEventListener('resize', this.onResize, false);
-  // }
-
   init(start = true) {
     if (this.needsMarquee === false) {
       return;
