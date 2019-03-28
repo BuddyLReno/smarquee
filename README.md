@@ -4,4 +4,4 @@
 
 # Smarquee
 
-Smart scrolling marquee for audio players and other text tickers.
+A smart scrolling marquee for audio players and other text tickers.

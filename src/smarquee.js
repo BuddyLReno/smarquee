@@ -34,7 +34,6 @@ export default class Smarquee {
   scrollWrapper = null;
   originalMarqueeContent = '';
   styleBlock = null;
-  resizeListenerTicking = false;
 
   constructor(options = {}) {
     this.id = mathUtils.generateHash();
@@ -187,5 +186,19 @@ export default class Smarquee {
 
   updateTimingFunction(timingFunction) {
     cssUtils.updateTimingFunction(this.scrollWrapper, timingFunction);
+  }
+
+  deInit() {
+    this.deactivate();
+    this.marqueeContainer.innerHTML = this.originalMarqueeContent;
+    this.scrollWrapper = null;
+  }
+
+  destroy() {
+    this.deInit();
+    this.originalMarqueeContent = '';
+    this.marqueeContainer = null;
+    this.styleBlock.parentNode.removeChild(this.styleBlock);
+    this.styleBlock = null;
   }
 }
