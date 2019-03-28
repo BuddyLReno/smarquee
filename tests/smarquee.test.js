@@ -1,6 +1,6 @@
 import Smarquee from '../src/smarquee';
 import * as cssUtils from '../src/css-utilities';
-jest.mock('../../src/math-utilities', () => ({
+jest.mock('../src/math-utilities', () => ({
   generateHash: () => 'ABC123',
   calculateAnimationValues: () => ({
     distance: 200,
