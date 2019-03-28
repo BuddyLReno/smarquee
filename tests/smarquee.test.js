@@ -105,6 +105,31 @@ test('needsMarquee returns false when when scrollWidth is equal or less than dis
   expect(subject.needsMarquee).toBe(false);
 });
 
+test("init doesn't initiate if no marquee is needed", () => {
+  jest.spyOn(subject, 'createScrollTitle');
+  jest.spyOn(subject, 'setupAnimationEvents');
+  jest.spyOn(subject, 'calculateAnimationProperties');
+  jest.spyOn(subject, 'setAnimationProperties');
+  jest.spyOn(subject, 'activate');
+
+  subject.init();
+
+  expect(subject.createScrollTitle).toHaveBeenCalledTimes(0);
+  expect(subject.setupAnimationEvents).toHaveBeenCalledTimes(0);
+  expect(subject.calculateAnimationProperties).toHaveBeenCalledTimes(0);
+  expect(subject.setAnimationProperties).toHaveBeenCalledTimes(0);
+  expect(subject.activate).toHaveBeenCalledTimes(0);
+});
+
+test("init doesn't activate is start is false", () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(subject, 'activate');
+
+  subject.init(false);
+
+  expect(subject.activate).toHaveBeenCalledTimes(0);
+});
+
 test('init adds scrolling content if needsMarquee is true', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   jest.spyOn(subject, 'createScrollTitle');

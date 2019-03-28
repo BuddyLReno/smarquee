@@ -18,3 +18,13 @@ test('returns object with expected properties', () => {
     time: 1
   });
 });
+
+test('generateHash returns a random value 12 characters long.', () => {
+  let subject = mathUtils.generateHash();
+  expect(subject.length).toBe(12);
+});
+
+test('generateHash always contains a random letter for the first character', () => {
+  let subject = mathUtils.generateHash();
+  expect(subject).toMatch(/^([A-Za-z]){1}/);
+});
