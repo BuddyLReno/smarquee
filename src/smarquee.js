@@ -34,6 +34,7 @@ export default class Smarquee {
   scrollWrapper = null;
   originalMarqueeContent = '';
   styleBlock = null;
+  resizeListenerTicking = false;
 
   constructor(options = {}) {
     this.id = mathUtils.generateHash();
@@ -74,6 +75,28 @@ export default class Smarquee {
     this.marqueeContainer.classList.add('Smarquee', `Smarquee--${this.id}`);
     this.originalMarqueeContent = this.marqueeContainer.innerHTML;
   }
+
+  // checkNeedsMarquee() {
+  //   if (this.needsMarquee) {
+  //     this.init(true);
+  //   } else {
+  //     this
+  //   }
+  //   // resize ticker
+  //   this.resizeListenerTicking = false;
+  // }
+
+  // onResize() {
+  //   if (!this.resizeListenerTicking) {
+  //     window.requestAnimationFrame(this.checkNeedsMarquee);
+  //   }
+
+  //   this.resizeListenerTicking = true;
+  // }
+
+  // setupResizeListener() {
+  //   window.addEventListener('resize', this.onResize, false);
+  // }
 
   init(start = true) {
     if (this.needsMarquee === false) {
