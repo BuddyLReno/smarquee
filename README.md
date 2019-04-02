@@ -5,3 +5,43 @@
 # Smarquee
 
 A smart scrolling marquee for audio players and other text tickers.
+
+## Overview
+
+Smarquee enables you to easily create a smooth, looping marquee without any hassle. Two lines of js is all it takes to create a marquee!
+
+```html
+<div id="smarquee">A title that needs to loop</div>
+```
+
+```javascript
+let smarquee = new Smarquee();
+smarquee.init();
+```
+
+## Key Features
+
+- Pure javascript and css transforms.
+- Zero dependencies
+- 2kb gzipped!
+- Play/Pause Controls
+- Animation callback events
+- Easily update animation properties.
+
+## Demos
+
+Coming soon!
+
+## Documentation
+
+Coming soon!
+
+## Licensing
+
+Using Smarquee for a personal site or open source site is completely free forever.
+
+To use Smarquee in a commercial project, please contact me for licensing options.
+
+## Contributing
+
+Please do! I'd love your help and ideas to make Smarquee even better. Please read CONTRIBUTING.md for more details.
