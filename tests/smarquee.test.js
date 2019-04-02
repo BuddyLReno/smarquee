@@ -216,12 +216,15 @@ test('deactivate remove the activate class', () => {
 
 test('restart removes active and readds after a short period', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  subject.init();
+  jest.useFakeTimers();
   jest.spyOn(subject, 'activate');
   jest.spyOn(subject, 'deactivate');
-  subject.init();
   subject.restart();
-  expect(subject.activate).toHaveBeenCalled();
   expect(subject.deactivate).toHaveBeenCalled();
+  jest.runAllTimers();
+  expect(setTimeout).toHaveBeenCalled();
+  expect(subject.activate).toHaveBeenCalled();
 });
 
 test('play updates playState with running', () => {
@@ -272,10 +275,12 @@ test('updateText reinits with a delay if given', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   jest.useFakeTimers();
   subject.init();
+  jest.spyOn(subject, 'init');
+  expect(subject.init).not.toHaveBeenCalled();
   subject.updateText('A new title', 2000);
-
+  jest.runAllTimers();
   expect(setTimeout).toHaveBeenCalledTimes(1);
-  expect(setTimeout).toHaveBeenLastCalledWith(expect.any(Function), 2000);
+  expect(subject.init).toHaveBeenCalled();
 });
 
 test('udpateIterationCount updates iterations with given value', () => {
@@ -341,4 +346,36 @@ test('updateTimingFunction updates direction with given value', () => {
     subject.scrollWrapper,
     'ease-in'
   );
+});
+
+test('deInit resets back to initial state before calling init', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(subject, 'deactivate');
+
+  expect(subject.marqueeContainer.innerHTML).toBe(
+    subject.originalMarqueeContent
+  );
+  expect(subject.scrollWrapper).toBe(null);
+
+  subject.init();
+  subject.deInit();
+
+  expect(subject.marqueeContainer.innerHTML).toBe(
+    subject.originalMarqueeContent
+  );
+  expect(subject.scrollWrapper).toBe(null);
+  expect(subject.deactivate).toHaveBeenCalledTimes(1);
+});
+
+test('destroy completely kills the smarquee object', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(subject, 'deInit');
+
+  subject.init();
+  subject.destroy();
+
+  expect(subject.deInit).toHaveBeenCalledTimes(1);
+  expect(subject.originalMarqueeContent).toBe('');
+  expect(subject.marqueeContainer).toBe(null);
+  expect(subject.styleBlock).toBe(null);
 });

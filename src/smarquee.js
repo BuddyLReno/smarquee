@@ -164,9 +164,13 @@ export default class Smarquee {
     this.deactivate();
     this.originalMarqueeContent = this.marqueeContainer.innerHTML = text;
 
-    setTimeout(() => {
-      this.init(start);
-    }, delay);
+    setTimeout(
+      (shouldStart) => {
+        this.init(shouldStart);
+      },
+      delay,
+      start
+    );
   }
 
   updateIterationCount(iterations) {
