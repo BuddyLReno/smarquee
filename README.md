@@ -44,4 +44,8 @@ To use Smarquee in a commercial project, please contact me for licensing options
 
 ## Contributing
 
-Please do! I'd love your help and ideas to make Smarquee even better. Please read CONTRIBUTING.md for more details.
+Please do! I'd love your help and ideas to make Smarquee even better. Please read [CONTRIBUTING.md](https://github.com/BuddyLReno/smarquee/blob/master/CONTRIBUTING.md) for more details.
+
+## License
+
+[GPL-2.0](https://github.com/BuddyLReno/smarquee/blob/master/LICENSE) © Buddy Reno
