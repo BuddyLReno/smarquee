@@ -48,4 +48,4 @@ Please do! I'd love your help and ideas to make Smarquee even better. Please rea
 
 ## License
 
-[GPL-2.0](https://github.com/BuddyLReno/smarquee/blob/master/LICENSE) © Buddy Reno
+[MPL-2.0](https://github.com/BuddyLReno/smarquee/blob/master/LICENSE) © Buddy Reno
