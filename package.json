@@ -1,6 +1,6 @@
 {
   "name": "smarquee",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A smart scrolling marquee for audio players and other scrolling text needs.",
   "author": "Buddy Reno <thebudman84+smarquee@gmail.com> (https://buddyreno.dev)",
   "license": "MPL-2.0",
@@ -37,6 +37,15 @@
     "url": "https://github.com/BuddyLReno/smarquee/issues"
   },
   "homepage": "https://github.com/BuddyLReno/smarquee#readme",
+  "keywords": [
+    "javascript",
+    "animated",
+    "marquee",
+    "scrolling marquee",
+    "animated marquee",
+    "ticker",
+    "text ticker"
+  ],
   "jest": {
     "setupFiles": [
       "jest-canvas-mock"
