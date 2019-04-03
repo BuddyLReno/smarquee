@@ -77,7 +77,5 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
-  "dependencies": {
-    "smarquee": "^1.0.1"
-  }
+  "dependencies": {}
 }
