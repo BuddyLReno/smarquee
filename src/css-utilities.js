@@ -4,9 +4,9 @@ function buildMainWrapper(id, styleOptions) {
     --distance: 0;
     --timingFunction: ${styleOptions.timingFunction};
     --iterationCount: ${styleOptions.iterationCount};
-    --direction: ${styleOptions.direction};
     --fillMode: ${styleOptions.fillMode};
     --playState: ${styleOptions.playState};
+    --delay: ${styleOptions.delay};
     overflow: hidden;
     white-space: nowrap;
   }`;
@@ -22,9 +22,10 @@ function buildAnimationProperties(id, styleOptions) {
   return `.Smarquee--${id} .animate {
     animation-name: ${styleOptions.animationName};
     animation-duration: var(--time);
+    animation-delay: var(--delay);
     animation-timing-function: var(--timingFunction);
     animation-iteration-count: var(--iterationCount);
-    animation-direction: var(--direction);
+    animation-direction: forwards;
     animation-fill-mode: var(--fillMode);
     animation-play-state: var(--playState);
   }`;
@@ -69,14 +70,14 @@ export function updateIterations(element, value) {
   element.style.setProperty('--iterationCount', value);
 }
 
-export function updateDirection(element, value) {
-  element.style.setProperty('--direction', value);
-}
-
 export function updateFillMode(element, value) {
   element.style.setProperty('--fillMode', value);
 }
 
 export function updateTimingFunction(element, value) {
   element.style.setProperty('--timingFunction', value);
+}
+
+export function updateDelay(element, value) {
+  element.style.setProperty('--delay', value);
 }

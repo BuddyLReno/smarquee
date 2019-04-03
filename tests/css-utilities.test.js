@@ -42,15 +42,6 @@ test('updateIterations updates the iteration variable with selected value', () =
   );
 });
 
-test('updateDirection updates the iteration variable with selected value', () => {
-  jest.spyOn(element.style, 'setProperty');
-  cssUtils.updateDirection(element, 'backwards');
-  expect(element.style.setProperty).toHaveBeenCalledWith(
-    '--direction',
-    'backwards'
-  );
-});
-
 test('updateFillMode updates the iteration variable with selected value', () => {
   jest.spyOn(element.style, 'setProperty');
   cssUtils.updateFillMode(element, 'both');
@@ -64,4 +55,10 @@ test('updateTimingFunction updates the iteration variable with selected value', 
     '--timingFunction',
     'ease-in'
   );
+});
+
+test('updateDelay updates the delay variable with selected value', () => {
+  jest.spyOn(element.style, 'setProperty');
+  cssUtils.updateDelay(element, '250ms');
+  expect(element.style.setProperty).toHaveBeenCalledWith('--delay', '250ms');
 });

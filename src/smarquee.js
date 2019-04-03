@@ -14,9 +14,9 @@ export default class Smarquee {
       timingFunction: 'linear',
       iterationCount: 'infinite',
       pausePercent: 30,
-      direction: 'normal',
       fillMode: 'none',
-      playState: 'running'
+      playState: 'running',
+      delay: '0s'
     },
     onAnimationStart() {},
     onAnimationIterate() {},
@@ -161,14 +161,14 @@ export default class Smarquee {
   }
 
   updateText(text, delay = 0, start = true) {
-    this.deactivate();
-    this.originalMarqueeContent = this.marqueeContainer.innerHTML = text;
-
     setTimeout(
-      (shouldStart) => {
+      (newText, shouldStart) => {
+        this.deactivate();
+        this.originalMarqueeContent = this.marqueeContainer.innerHTML = newText;
         this.init(shouldStart);
       },
       delay,
+      text,
       start
     );
   }
@@ -180,12 +180,12 @@ export default class Smarquee {
     );
   }
 
-  updateDirection(direction) {
-    cssUtils.updateDirection(this.scrollWrapper, direction);
-  }
-
   updateFillMode(fillMode) {
     cssUtils.updateFillMode(this.scrollWrapper, fillMode);
+  }
+
+  updateDelay(delay) {
+    cssUtils.updateDelay(this.scrollWrapper, delay);
   }
 
   updateTimingFunction(timingFunction) {

@@ -18,7 +18,11 @@
     </div>
     <script type="text/javascript" src="smarquee.min.js"></script>
     <script type="text/javascript">
-      const smarquee = new Smarquee();
+      const smarquee = new Smarquee({
+        onAnimationCancel: () => {
+          alert('canceled');
+        }
+      });
       smarquee.init();
     </script>
   </body>

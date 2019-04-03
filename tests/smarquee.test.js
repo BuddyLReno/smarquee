@@ -44,7 +44,6 @@ test('settings object returns with default properties', () => {
       timingFunction: 'linear',
       iterationCount: 'infinite',
       pausePercent: 30,
-      direction: 'normal',
       fillMode: 'none',
       playState: 'running'
     }
@@ -80,7 +79,6 @@ test('assignSettings object reassigns defaults with passed in properties', () =>
       timingFunction: 'linear',
       iterationCount: 'infinite',
       pausePercent: 30,
-      direction: 'normal',
       fillMode: 'none',
       playState: 'running'
     }
@@ -255,10 +253,12 @@ test('pause updates playState with paused', () => {
 
 test('updateText updates the innerHtml with the new text', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.useFakeTimers();
   subject.init();
   expect(subject.originalMarqueeContent).toBe('A test title');
   expect(subject.marqueeContainer.innerHTML).toContain('A test title');
   subject.updateText('A new title');
+  jest.runAllTimers();
   expect(subject.originalMarqueeContent).toBe('A new title');
   expect(subject.marqueeContainer.innerHTML).toContain('A new title');
 });
@@ -266,8 +266,10 @@ test('updateText updates the innerHtml with the new text', () => {
 test('updateText deactivates the animation', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   jest.spyOn(subject, 'deactivate');
+  jest.useFakeTimers();
   subject.init();
   subject.updateText('A new title');
+  jest.runAllTimers();
   expect(subject.deactivate).toHaveBeenCalled();
 });
 
@@ -309,20 +311,7 @@ test('udpateIterationCount converts NaN values to infinite', () => {
   );
 });
 
-test('updateDirection updates direction with given value', () => {
-  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
-  jest.spyOn(cssUtils, 'updateDirection');
-
-  subject.init();
-  subject.updateDirection('backwards');
-
-  expect(cssUtils.updateDirection).toHaveBeenCalledWith(
-    subject.scrollWrapper,
-    'backwards'
-  );
-});
-
-test('updateFillMode updates direction with given value', () => {
+test('updateFillMode updates fill mode with given value', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   jest.spyOn(cssUtils, 'updateFillMode');
 
@@ -335,7 +324,20 @@ test('updateFillMode updates direction with given value', () => {
   );
 });
 
-test('updateTimingFunction updates direction with given value', () => {
+test('updateDelay updates delay with given value', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'updateDelay');
+
+  subject.init();
+  subject.updateDelay('250ms');
+
+  expect(cssUtils.updateDelay).toHaveBeenCalledWith(
+    subject.scrollWrapper,
+    '250ms'
+  );
+});
+
+test('updateTimingFunction updates timing function with given value', () => {
   jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
   jest.spyOn(cssUtils, 'updateTimingFunction');
 
