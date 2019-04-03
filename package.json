@@ -1,12 +1,12 @@
 {
   "name": "smarquee",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A smart scrolling marquee for audio players and other scrolling text needs.",
   "author": "Buddy Reno <thebudman84+smarquee@gmail.com> (https://buddyreno.dev)",
   "license": "MPL-2.0",
   "main": "dist/smarquee.min.js",
   "scripts": {
-    "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js && cp dist/smarquee.min.js demo",
+    "compile": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=webpack.config.js && cp dist/smarquee.min.js demo && cp dist/smarquee.min.js .",
     "test": "jest",
     "test-ci": "TZ='utc' jest --no-cache --coverage -w=4",
     "demo": "browser-sync start --server 'demo' --files 'demo'",
@@ -77,5 +77,7 @@
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "smarquee": "^1.0.1"
+  }
 }
