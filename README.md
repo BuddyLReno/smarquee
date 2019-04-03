@@ -209,7 +209,7 @@ No going back. The instance is completely destroyed. All html modifications and 
 
 Using Smarquee for a personal site or open source site is completely free forever.
 
-To use Smarquee in a commercial project, please contact me for licensing options.
+To use Smarquee in a commercial project, please contact me for licensing options at [buddylreno@gmail.com](mailto:buddylreno@gmail.com).
 
 ## Contributing
 
