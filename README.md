@@ -29,9 +29,9 @@ smarquee.init();
 - Zero dependencies
 - 2kb gzipped!
 
-## Demos
+## Demo
 
-Coming soon!
+View the interactive demo on [CodePen](https://codepen.io/BuddyLReno/full/XQXrxZ)
 
 ## Installation
 
