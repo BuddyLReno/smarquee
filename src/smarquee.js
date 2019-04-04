@@ -153,11 +153,11 @@ export default class Smarquee {
   }
 
   play() {
-    cssUtils.updatePlayState(this.scrollWrapper, 'running');
+    cssUtils.updatePlayState(this.marqueeContainer, 'running');
   }
 
   pause() {
-    cssUtils.updatePlayState(this.scrollWrapper, 'paused');
+    cssUtils.updatePlayState(this.marqueeContainer, 'paused');
   }
 
   updateText(text, delay = 0, start = true) {
@@ -175,21 +175,25 @@ export default class Smarquee {
 
   updateIterationCount(iterations) {
     cssUtils.updateIterations(
-      this.scrollWrapper,
+      this.marqueeContainer,
       isNaN(iterations) ? 'infinite' : iterations
     );
   }
 
   updateFillMode(fillMode) {
-    cssUtils.updateFillMode(this.scrollWrapper, fillMode);
+    cssUtils.updateFillMode(this.marqueeContainer, fillMode);
   }
 
   updateDelay(delay) {
-    cssUtils.updateDelay(this.scrollWrapper, delay);
+    cssUtils.updateDelay(this.marqueeContainer, delay);
   }
 
   updateTimingFunction(timingFunction) {
-    cssUtils.updateTimingFunction(this.scrollWrapper, timingFunction);
+    cssUtils.updateTimingFunction(this.marqueeContainer, timingFunction);
+  }
+
+  resetStyleProperties() {
+    cssUtils.resetStyleProperties(this.marqueeContainer);
   }
 
   deInit() {

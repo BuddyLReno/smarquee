@@ -197,6 +197,10 @@ Updates the animation's delay property. This will only be a factor when an anima
 
 Updates the animation's timing function.
 
+#### resetStyleProperties()
+
+Removes all style properties that were updated via the API methods after init.
+
 #### deInit()
 
 Deinitializes the smarquee instance. The instance will require a call to `init()` to restart.

@@ -81,3 +81,11 @@ export function updateTimingFunction(element, value) {
 export function updateDelay(element, value) {
   element.style.setProperty('--delay', value);
 }
+
+export function resetStyleProperties(element) {
+  element.style.removeProperty('--playState');
+  element.style.removeProperty('--iterationCount');
+  element.style.removeProperty('--fillMode');
+  element.style.removeProperty('--timingFunction');
+  element.style.removeProperty('--delay');
+}

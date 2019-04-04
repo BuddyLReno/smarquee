@@ -62,3 +62,13 @@ test('updateDelay updates the delay variable with selected value', () => {
   cssUtils.updateDelay(element, '250ms');
   expect(element.style.setProperty).toHaveBeenCalledWith('--delay', '250ms');
 });
+
+test('resetStyleProperties removes any properties updated after init', () => {
+  jest.spyOn(element.style, 'removeProperty');
+  cssUtils.resetStyleProperties(element);
+  expect(element.style.removeProperty).toHaveBeenCalledWith('--playState');
+  expect(element.style.removeProperty).toHaveBeenCalledWith('--iterationCount');
+  expect(element.style.removeProperty).toHaveBeenCalledWith('--fillMode');
+  expect(element.style.removeProperty).toHaveBeenCalledWith('--timingFunction');
+  expect(element.style.removeProperty).toHaveBeenCalledWith('--delay');
+});

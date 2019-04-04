@@ -233,7 +233,7 @@ test('play updates playState with running', () => {
   subject.play();
 
   expect(cssUtils.updatePlayState).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     'running'
   );
 });
@@ -246,7 +246,7 @@ test('pause updates playState with paused', () => {
   subject.pause();
 
   expect(cssUtils.updatePlayState).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     'paused'
   );
 });
@@ -293,7 +293,7 @@ test('udpateIterationCount updates iterations with given value', () => {
   subject.updateIterationCount(3);
 
   expect(cssUtils.updateIterations).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     3
   );
 });
@@ -306,7 +306,7 @@ test('udpateIterationCount converts NaN values to infinite', () => {
   subject.updateIterationCount('google');
 
   expect(cssUtils.updateIterations).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     'infinite'
   );
 });
@@ -319,7 +319,7 @@ test('updateFillMode updates fill mode with given value', () => {
   subject.updateFillMode('both');
 
   expect(cssUtils.updateFillMode).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     'both'
   );
 });
@@ -332,8 +332,20 @@ test('updateDelay updates delay with given value', () => {
   subject.updateDelay('250ms');
 
   expect(cssUtils.updateDelay).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     '250ms'
+  );
+});
+
+test('resetStyleProperties removes properties updated after init', () => {
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(true);
+  jest.spyOn(cssUtils, 'resetStyleProperties');
+
+  subject.init();
+  subject.resetStyleProperties();
+
+  expect(cssUtils.resetStyleProperties).toHaveBeenCalledWith(
+    subject.marqueeContainer
   );
 });
 
@@ -345,7 +357,7 @@ test('updateTimingFunction updates timing function with given value', () => {
   subject.updateTimingFunction('ease-in');
 
   expect(cssUtils.updateTimingFunction).toHaveBeenCalledWith(
-    subject.scrollWrapper,
+    subject.marqueeContainer,
     'ease-in'
   );
 });
