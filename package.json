@@ -13,7 +13,7 @@
     "build-css": "sass src/stylesheets/demo.scss demo/demo.css",
     "build-js": "yarn run compile",
     "watch-css": "nodemon -e scss -x \"yarn run build-css\" --ignore 'demo/'",
-    "watch-js": "nodemon -e js -x \"yarn run build-js\" --ignore 'src/tests/' --ignore 'demo/' --ignore 'dist/'",
+    "watch-js": "nodemon -e js -x \"yarn run build-js\" --ignore 'src/tests/' --ignore 'demo/' --ignore 'dist/' --ignore '/smarquee.min.js'",
     "watcher": "concurrently \"npm:watch-*\"",
     "lint-staged": "lint-staged",
     "prettier-all": "prettier --write '{src,tests}/**/*.js'",
