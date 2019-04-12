@@ -51,7 +51,7 @@ export default class Smarquee {
   // getters and setters
   get needsMarquee() {
     return (
-      this.marqueeContainer.scrollWidth > this.marqueeContainer.clientWidth
+      this.marqueeContainer.scrollWidth >= this.marqueeContainer.clientWidth
     );
   }
 

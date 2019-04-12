@@ -101,13 +101,23 @@ test('needsMarquee returns true when when scrollWidth is larger than displayed w
   expect(subject.needsMarquee).toBe(true);
 });
 
-test('needsMarquee returns false when when scrollWidth is equal or less than displayed width', () => {
+test('needsMarquee returns true when when scrollWidth is the same as displayed width', () => {
   jest
     .spyOn(subject.marqueeContainer, 'scrollWidth', 'get')
-    .mockReturnValue(10);
+    .mockReturnValue(800);
   jest
     .spyOn(subject.marqueeContainer, 'clientWidth', 'get')
-    .mockReturnValue(10);
+    .mockReturnValue(800);
+  expect(subject.needsMarquee).toBe(true);
+});
+
+test('needsMarquee returns false when when scrollWidth is less than displayed width', () => {
+  jest
+    .spyOn(subject.marqueeContainer, 'scrollWidth', 'get')
+    .mockReturnValue(15);
+  jest
+    .spyOn(subject.marqueeContainer, 'clientWidth', 'get')
+    .mockReturnValue(100);
   expect(subject.needsMarquee).toBe(false);
 });
 
@@ -117,6 +127,8 @@ test("init doesn't initiate if no marquee is needed", () => {
   jest.spyOn(subject, 'calculateAnimationProperties');
   jest.spyOn(subject, 'setAnimationProperties');
   jest.spyOn(subject, 'activate');
+
+  jest.spyOn(subject, 'needsMarquee', 'get').mockReturnValue(false);
 
   subject.init();
 
