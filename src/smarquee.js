@@ -24,7 +24,7 @@ export default class Smarquee {
     onAnimationCancel() {},
     onClick() {}
   };
-  animationCalulations = {
+  animationCalculations = {
     distance: 0,
     animatedDistance: 0,
     time: 0
@@ -122,7 +122,7 @@ export default class Smarquee {
   }
 
   calculateAnimationProperties() {
-    this.animationCalulations = mathUtils.calculateAnimationValues(
+    this.animationCalculations = mathUtils.calculateAnimationValues(
       this.marqueeContainer.scrollWidth,
       this.settings.velocity,
       this.settings.styleOptions.scrollingTitleMargin
@@ -132,8 +132,8 @@ export default class Smarquee {
   setAnimationProperties() {
     cssUtils.setAnimationProperties(
       this.marqueeContainer,
-      this.animationCalulations.time,
-      this.animationCalulations.animatedDistance
+      this.animationCalculations.time,
+      this.animationCalculations.animatedDistance
     );
   }
 
