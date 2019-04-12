@@ -1,6 +1,6 @@
 {
   "name": "smarquee",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A smart scrolling marquee for audio players and other scrolling text needs.",
   "author": "Buddy Reno <thebudman84+smarquee@gmail.com> (https://buddyreno.dev)",
   "license": "MPL-2.0",
